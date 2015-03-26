@@ -7,8 +7,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +24,6 @@ public class StartActivity extends ActionBarActivity {
     private ArrayAdapter<String> adapter;
     private ActionBarDrawerToggle drawerToggle;
     private DrawerLayout drawerLayout;
-    private String activityTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +36,23 @@ public class StartActivity extends ActionBarActivity {
         }
 
         drawerLayout = (DrawerLayout) findViewById(R.id.start_activity_drawer_layout);
-        activityTitle = getTitle().toString();
 
-//        setting navigation drawer items
+        // setting navigation drawer items
         drawerList = (ListView) findViewById(R.id.start_activity_left_drawer_list);
         String[] drawerArray = getResources().getStringArray(R.array.start_activity_navigation_drawer);
-        List<String> drawerArrayList = new ArrayList<String>(Arrays.asList(drawerArray));
+        List<String>  drawerArrayList = new ArrayList<String>(Arrays.asList(drawerArray));
 
         adapter = new ArrayAdapter<String>(
                 this,
-//                TODO  change item in listView (icon + text)
+                // TODO  change item in listView (icon + text)
                 android.R.layout.simple_list_item_1,
                 drawerArrayList);
         drawerList.setAdapter(adapter);
 
         drawerToggle = new ActionBarDrawerToggle(
                 this,
-                drawerLayout,android.R.drawable.ic_menu_more,
+                drawerLayout,
+                R.drawable.ic_drawer,
                 R.string.start_activity_drawer_open,
                 R.string.start_activity_drawer_close) {
 
@@ -59,7 +60,7 @@ public class StartActivity extends ActionBarActivity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle("Dupa Opened");
+                getSupportActionBar().setTitle(getSupportActionBar().getTitle().toString());
                 supportInvalidateOptionsMenu();
             }
 
@@ -67,7 +68,7 @@ public class StartActivity extends ActionBarActivity {
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getSupportActionBar().setTitle(activityTitle);
+                getSupportActionBar().setTitle(getSupportActionBar().getTitle().toString());
                 supportInvalidateOptionsMenu();
             }
         };
@@ -77,6 +78,14 @@ public class StartActivity extends ActionBarActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // TODO set onclick listeners for items
+                Toast.makeText(getApplicationContext(), "This is DUPA!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -122,7 +131,7 @@ public class StartActivity extends ActionBarActivity {
             return true;
         }
 
-        //Activate navigation drawer toggle
+        // Activate navigation drawer toggle
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
