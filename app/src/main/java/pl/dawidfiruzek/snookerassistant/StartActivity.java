@@ -8,22 +8,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class StartActivity extends ActionBarActivity {
 
 
-    private ListView drawerList;
-    private ArrayAdapter<String> adapter;
-    private ActionBarDrawerToggle drawerToggle;
-    private DrawerLayout drawerLayout;
+    private ListView mDrawerList;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private ArrayList<NavigationDrawerItem> mNavItems = new ArrayList<NavigationDrawerItem>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +32,19 @@ public class StartActivity extends ActionBarActivity {
                     .commit();
         }
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.start_activity_drawer_layout);
+        //TODO populate mNavItems by Resource values.
+        mNavItems.add(new NavigationDrawerItem("Home", "Meetup", R.drawable.abc_ic_clear));
+        mNavItems.add(new NavigationDrawerItem("Dupa", "Trolololo", R.drawable.abc_ic_clear));
 
-        // setting navigation drawer items
-        drawerList = (ListView) findViewById(R.id.start_activity_left_drawer_list);
-        String[] drawerArray = getResources().getStringArray(R.array.start_activity_navigation_drawer);
-        List<String>  drawerArrayList = new ArrayList<String>(Arrays.asList(drawerArray));
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.start_activity_drawer_layout);
 
-        adapter = new ArrayAdapter<String>(
+        mDrawerList = (ListView) findViewById (R.id.start_activity_left_drawer_list);
+        DrawerListAdapter adapter = new DrawerListAdapter(this, mNavItems);
+        mDrawerList.setAdapter(adapter);
+
+        mDrawerToggle = new ActionBarDrawerToggle(
                 this,
-                // TODO  change item in listView (icon + text)
-                android.R.layout.simple_list_item_1,
-                drawerArrayList);
-        drawerList.setAdapter(adapter);
-
-        drawerToggle = new ActionBarDrawerToggle(
-                this,
-                drawerLayout,
+                mDrawerLayout,
                 R.drawable.ic_drawer,
                 R.string.start_activity_drawer_open,
                 R.string.start_activity_drawer_close) {
@@ -60,7 +53,6 @@ public class StartActivity extends ActionBarActivity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle(getSupportActionBar().getTitle().toString());
                 supportInvalidateOptionsMenu();
             }
 
@@ -68,18 +60,17 @@ public class StartActivity extends ActionBarActivity {
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getSupportActionBar().setTitle(getSupportActionBar().getTitle().toString());
                 supportInvalidateOptionsMenu();
             }
         };
 
-        drawerToggle.setDrawerIndicatorEnabled(true);
-        drawerLayout.setDrawerListener(drawerToggle);
+        mDrawerToggle.setDrawerIndicatorEnabled(true);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // TODO set onclick listeners for items
@@ -91,30 +82,22 @@ public class StartActivity extends ActionBarActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
-        drawerToggle.syncState();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_start, menu);
-        return true;
+        mDrawerToggle.syncState();
     }
 
     @Override
     public boolean onMenuOpened(int featureId, Menu menu) {
-        if(! drawerLayout.isDrawerOpen(drawerList)) {
-            drawerLayout.openDrawer(drawerList);
+        if(! mDrawerLayout.isDrawerOpen(mDrawerList)) {
+            mDrawerLayout.openDrawer(mDrawerList);
         }
-        else    drawerLayout.closeDrawers();
+        else    mDrawerLayout.closeDrawers();
         return super.onMenuOpened(featureId, menu);
     }
 
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(drawerList)){
-            drawerLayout.closeDrawers();
+        if(mDrawerLayout.isDrawerOpen(mDrawerList)){
+            mDrawerLayout.closeDrawers();
         }
         else super.onBackPressed();
     }
@@ -132,7 +115,7 @@ public class StartActivity extends ActionBarActivity {
         }
 
         // Activate navigation drawer toggle
-        if (drawerToggle.onOptionsItemSelected(item)) {
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 
