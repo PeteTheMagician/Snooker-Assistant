@@ -8,12 +8,6 @@
     <string name="championship">Championship</string>
     <string name="players">Players</string>
 
-    <!-- navigation drawer -->
-    <string-array name="start_activity_navigation_drawer">
-        <item>Settings</item>
-        <item>About</item>
-    </string-array>
-
     <string name="start_activity_drawer_open">Open navigation drawer</string>
     <string name="start_activity_drawer_close">Close navigation drawer</string>
 </resources>

@@ -1,9 +1,11 @@
 package pl.dawidfiruzek.snookerassistant;
 
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,11 +18,16 @@ import java.util.ArrayList;
 
 public class StartActivity extends ActionBarActivity {
 
+    public static final String TAG = "Snooker Assistant";
 
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ArrayList<NavigationDrawerItem> mNavItems = new ArrayList<NavigationDrawerItem>();
+
+    private String[] mNavDrawerTitles;
+    private String[] mNavDrawerSubtitles;
+    private TypedArray mNavDrawerIcons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +39,15 @@ public class StartActivity extends ActionBarActivity {
                     .commit();
         }
 
-        //TODO populate mNavItems by Resource values.
-        mNavItems.add(new NavigationDrawerItem("Home", "Meetup", R.drawable.abc_ic_clear));
-        mNavItems.add(new NavigationDrawerItem("Dupa", "Trolololo", R.drawable.abc_ic_clear));
+        mNavDrawerTitles = getResources().getStringArray(R.array.start_activity_navDrawer_titles);
+        mNavDrawerSubtitles = getResources().getStringArray(R.array.start_activity_navDrawer_subtitles);
+        mNavDrawerIcons = getResources().obtainTypedArray(R.array.start_activity_navDrawer_icons);
+
+        for(int i =0; i < mNavDrawerTitles.length; ++i){
+            mNavItems.add(new NavigationDrawerItem(mNavDrawerTitles[i], mNavDrawerSubtitles[i], mNavDrawerIcons.getResourceId(i,-1)));
+        }
+
+        mNavDrawerIcons.recycle();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.start_activity_drawer_layout);
 
@@ -73,10 +86,30 @@ public class StartActivity extends ActionBarActivity {
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // TODO set onclick listeners for items
-                Toast.makeText(getApplicationContext(), "This is DUPA!", Toast.LENGTH_SHORT).show();
+                onClickNavDrawerItem(i);
             }
         });
+    }
+
+    private void onClickNavDrawerItem(int position){
+        android.support.v4.app.Fragment fragment = null;
+
+        switch (position){
+            // Home
+            case 0:
+                fragment = new StartFragment();
+                break;
+            default:
+                Log.e(TAG, "Unexpected Navigation Drawer item ID");
+                break;
+        }
+
+        if (fragment != null){
+            Toast.makeText(getApplicationContext(), "This is DUPA!", Toast.LENGTH_SHORT).show();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, fragment).commit();
+        }
+        else Log.e(TAG, "Error in creating fragment");
     }
 
     @Override
