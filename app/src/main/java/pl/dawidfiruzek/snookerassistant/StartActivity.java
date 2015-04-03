@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -92,24 +91,44 @@ public class StartActivity extends ActionBarActivity {
     }
 
     private void onClickNavDrawerItem(int position){
-        android.support.v4.app.Fragment fragment = null;
+//        android.support.v4.app.Fragment fragment = null;
 
         switch (position){
             // Home
             case 0:
-                fragment = new StartFragment();
+//                fragment = new StartFragment();
+                getSupportFragmentManager().popBackStack(null, getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
+                        .replace(R.id.container, new StartFragment())
+                        .commit();
+                break;
+            // Settings
+            case 1:
+//                getSupportFragmentManager().beginTransaction()
+//                        .replace(R.id.container, new SettingsFragment())
+//                        .addToBackStack(null)
+//                        .commit();
+                break;
+            // About
+            case 2:
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
+                        .replace(R.id.container, new AboutFragment())
+                        .addToBackStack(null)
+                        .commit();
                 break;
             default:
                 Log.e(TAG, "Unexpected Navigation Drawer item ID");
                 break;
         }
 
-        if (fragment != null){
-            Toast.makeText(getApplicationContext(), "This is DUPA!", Toast.LENGTH_SHORT).show();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, fragment).commit();
-        }
-        else Log.e(TAG, "Error in creating fragment");
+//        if (fragment != null){
+//            Toast.makeText(getApplicationContext(), "This is DUPA!", Toast.LENGTH_SHORT).show();
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.container, fragment).commit();
+//        }
+//        else Log.e(TAG, "Error in creating fragment");
     }
 
     @Override

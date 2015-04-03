@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 
 /**
@@ -40,10 +39,11 @@ public class StartFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.button_championship:
-            case R.id.button_players:
             case R.id.button_quick_match:
                 onClickButtonQuickMatch();
+                break;
+            case R.id.button_championship:
+            case R.id.button_players:
                 break;
             default:
                 Log.e(StartActivity.TAG, "Unexpected onClick item ID");
@@ -52,7 +52,12 @@ public class StartFragment extends Fragment implements View.OnClickListener {
     }
 
     public void onClickButtonQuickMatch(){
-        Toast.makeText(getActivity().getApplicationContext(), "Dupa penis", Toast.LENGTH_SHORT).show();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
+                .replace(R.id.container, new AddPlayersFragment())
+                .addToBackStack(null)
+                .commit();
+
 
 //        Intent intent = new Intent(getActivity(), StartActivity.class);
 //        intent.putExtra("GAME_MODE", "QUICK_MATCH");

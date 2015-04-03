@@ -9,8 +9,8 @@
     android:background="@color/darkgreen">
 
     <Button
-        android:layout_width="@dimen/start_activity_button_width"
-        android:layout_height="@dimen/start_activity_button_height"
+        android:layout_width="@dimen/snooker_assistant_button_width"
+        android:layout_height="@dimen/snooker_assistant_button_height"
         android:text="@string/quick_match"
         android:id="@+id/button_quick_match"
         android:layout_above="@+id/button_championship"
@@ -18,16 +18,15 @@
         android:layout_alignStart="@+id/button_championship" />
 
     <Button
-        android:layout_width="@dimen/start_activity_button_width"
-        android:layout_height="@dimen/start_activity_button_height"
+        android:layout_width="@dimen/snooker_assistant_button_width"
+        android:layout_height="@dimen/snooker_assistant_button_height"
         android:text="@string/championship"
         android:id="@+id/button_championship"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerInParent="true" />
 
     <Button
-        android:layout_width="@dimen/start_activity_button_width"
-        android:layout_height="@dimen/start_activity_button_height"
+        android:layout_width="@dimen/snooker_assistant_button_width"
+        android:layout_height="@dimen/snooker_assistant_button_height"
         android:text="@string/players"
         android:id="@+id/button_players"
         android:layout_below="@+id/button_championship"

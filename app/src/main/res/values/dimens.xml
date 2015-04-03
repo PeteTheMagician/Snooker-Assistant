@@ -4,6 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="left_drawer_width">240dp</dimen>
-    <dimen name="start_activity_button_width">250dp</dimen>
-    <dimen name="start_activity_button_height">60dp</dimen>
+    <dimen name="snooker_assistant_button_width">250dp</dimen>
+    <dimen name="snooker_assistant_button_height">60dp</dimen>
 </resources>
