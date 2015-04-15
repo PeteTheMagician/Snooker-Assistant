@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pl.dawidfiruzek.snookerassistant.FrameChooserFragment"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/darkgreen" >
+
+    <Button
+        android:id="@+id/chooseFrame_button_next"
+        android:layout_width="@dimen/snooker_assistant_button_width"
+        android:layout_height="@dimen/snooker_assistant_button_height"
+        android:text="@string/next"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
+
+    <EditText
+        android:id="@+id/chooseFrame_editText_enter_frames"
+        android:layout_width="@dimen/snooker_assistant_button_width"
+        android:layout_height="@dimen/abc_action_bar_default_height"
+        android:hint="@string/choose_frame_hint"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:background="@android:color/white"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_alignParentTop="true"
+        android:text="@string/choose_frame_text"
+        android:layout_centerHorizontal="true"/>
+</RelativeLayout>
