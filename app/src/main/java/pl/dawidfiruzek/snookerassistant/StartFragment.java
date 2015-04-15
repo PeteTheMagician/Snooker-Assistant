@@ -53,7 +53,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
 
     public void onClickButtonQuickMatch(){
         getActivity().getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
+                .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_fade_in, R.anim.abc_fade_out)
                 .replace(R.id.container, new AddPlayersFragment())
                 .addToBackStack(null)
                 .commit();

@@ -44,7 +44,7 @@ public class AddPlayersFragment extends Fragment implements View.OnClickListener
 
     private void onClickButtonNext(){
         getActivity().getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
+                .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_fade_in, R.anim.abc_fade_out)
                 .replace(R.id.container, new FrameChooserFragment())
                 .addToBackStack(null)
                 .commit();

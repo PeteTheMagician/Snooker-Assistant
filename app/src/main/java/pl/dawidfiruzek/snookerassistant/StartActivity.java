@@ -99,7 +99,7 @@ public class StartActivity extends ActionBarActivity {
 //                fragment = new StartFragment();
                 getSupportFragmentManager().popBackStack(null, getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
                 getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
+                        .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_fade_in, R.anim.abc_fade_out)
                         .replace(R.id.container, new StartFragment())
                         .commit();
                 break;
@@ -113,7 +113,7 @@ public class StartActivity extends ActionBarActivity {
             // About
             case 2:
                 getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)
+                        .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_fade_in, R.anim.abc_fade_out)
                         .replace(R.id.container, new AboutFragment())
                         .addToBackStack(null)
                         .commit();
@@ -122,6 +122,8 @@ public class StartActivity extends ActionBarActivity {
                 Log.e(TAG, "Unexpected Navigation Drawer item ID");
                 break;
         }
+        // after clicking in element navigation drawer hides
+        mDrawerLayout.closeDrawers();
 
 //        if (fragment != null){
 //            Toast.makeText(getApplicationContext(), "This is DUPA!", Toast.LENGTH_SHORT).show();
