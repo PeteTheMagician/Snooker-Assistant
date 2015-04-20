@@ -105,10 +105,11 @@ public class StartActivity extends ActionBarActivity {
                 break;
             // Settings
             case 1:
-//                getSupportFragmentManager().beginTransaction()
-//                        .replace(R.id.container, new SettingsFragment())
-//                        .addToBackStack(null)
-//                        .commit();
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_fade_in, R.anim.abc_fade_out)
+                        .replace(R.id.container, new SettingsFragment())
+                        .addToBackStack(null)
+                        .commit();
                 break;
             // About
             case 2:
