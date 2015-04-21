@@ -19,13 +19,23 @@ public class SettingsFragment extends PreferenceFragment {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+    public void onCreate(Bundle paramBundle) {
+        super.onCreate(paramBundle);
+
+        addPreferencesFromResource(R.xml.preferences);
     }
 
+    @Override
+    public View onCreateView(LayoutInflater paramLayoutInflater, ViewGroup paramViewGroup, Bundle paramBundle) {
+        View view = super.onCreateView(paramLayoutInflater, paramViewGroup, paramBundle);
 
+        int horizontalMargin = (int) getResources().getDimension(R.dimen.activity_horizontal_margin);
+        int verticalMargin = (int) getResources().getDimension(R.dimen.activity_vertical_margin);
+
+        view.setPadding(horizontalMargin, verticalMargin, horizontalMargin, verticalMargin);
+        view.setBackgroundColor(getResources().getColor(R.color.darkgreen));
+
+        return view;
+    }
 }
